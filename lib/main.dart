@@ -27,217 +27,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Map<String, Object>> data = [
-    {
-      "name": "HM1",
-      "itemStyle": {
-        "color": '#00B04F',
-      },
-    },
-    {
-      "name": "HM2",
-      "itemStyle": {
-        "color": '#00B04F',
-      },
-    },
-    {
-      "name": "HM3",
-      "itemStyle": {
-        "color": '#00B04F',
-      },
-    },
-    {
-      "name": "MT1",
-      "itemStyle": {
-        "color": '#00B04F',
-      },
-    },
-    {
-      "name": "H1",
-      "itemStyle": {
-        "color": '#00B04F',
-      },
-    },
-    {
-      "name": "Storage",
-      "itemStyle": {
-        "color": '#3F3F3F',
-      }
-    },
-    {
-      "name": "ExportHarvest",
-      "itemStyle": {
-        "color": '#000000',
-      }
-    },
-    {
-      "name": "StoreHarvest",
-      "itemStyle": {
-        "color": '#01B0F2',
-      }
-    },
-    {
-      "name": "Enjoy",
-      "itemStyle": {
-        "color": '#FE0000',
-      }
-    },
-    {
-      "name": "Aircon",
-      "itemStyle": {
-        "color": '#FE0000',
-      }
-    },
-    {
-      "name": "Utility",
-      "itemStyle": {
-        "color": '#FE0000',
-      }
-    },
-    {
-      "name": "Light",
-      "itemStyle": {
-        "color": '#FE0000',
-      }
-    },
-    {
-      "name": "Other",
-      "itemStyle": {
-        "color": '#FE0000',
-      }
-    },
-    {
-      "name": "EnjoyStore",
-      "itemStyle": {
-        "color": '#000000',
-      }
-    },
-    {
-      "name": "ExportStore",
-      "itemStyle": {
-        "color": '#01B0F1',
-      }
-    },
-  ];
+  List<Map<String, Object>> data = [];
 
-  List<Map<String, Object>> links = [
-    {
-      "source": "HM1",
-      "target": "MT1",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "HM2",
-      "target": "MT1",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "HM3",
-      "target": "MT1",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "MT1",
-      "target": "H1",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "H1",
-      "target": "Storage",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "ExportHarvest",
-      "target": "Storage",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "StoreHarvest",
-      "target": "Storage",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "Storage",
-      "target": "Enjoy",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "Enjoy",
-      "target": "Aircon",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "Enjoy",
-      "target": "Utility",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "Enjoy",
-      "target": "Light",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "Enjoy",
-      "target": "Other",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "Storage",
-      "target": "EnjoyStore",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-    {
-      "source": "Storage",
-      "target": "ExportStore",
-      "value": 1,
-      "lineStyle": {
-        "color": 'gradient',
-      }
-    },
-  ];
+  List<Map<String, Object>> links = [];
 
   getData1() async {
-    await Future.delayed(Duration(seconds: 4));
-
     const dataObj = [
       {
         "name": "H",
@@ -249,41 +43,45 @@ class _MyHomePageState extends State<MyHomePage> {
         "name": "Storage",
         "itemStyle": {
           "color": '#3F3F3F',
-        }
+        },
       },
       {
         "name": "ExportHarvest",
         "itemStyle": {
           "color": '#000000',
-        }
+        },
       },
       {
         "name": "StoreHarvest",
         "itemStyle": {
           "color": '#01B0F2',
-        }
+        },
       },
       {
         "name": "Enjoy",
         "itemStyle": {
           "color": '#FE0000',
+        },
+      },
+      {
+        "name": "EnjoyStore",
+        "itemStyle": {
+          "color": '#000000',
         }
-      }
+      },
+      {
+        "name": "ExportStore",
+        "itemStyle": {
+          "color": '#01B0F1',
+        }
+      },
     ];
 
-    this.setState(() {
-      this.data = dataObj;
-    });
-  }
-
-  getData2() async {
-    await Future.delayed(Duration(seconds: 4));
-
-    const dataObj = [
+    const linksObj = [
       {
         "source": "H",
         "target": "Storage",
-        "value": 3,
+        "value": 1,
         "lineStyle": {
           "color": 'gradient',
         }
@@ -311,19 +109,97 @@ class _MyHomePageState extends State<MyHomePage> {
         "lineStyle": {
           "color": 'gradient',
         }
-      }
+      },
+      {
+        "source": "Storage",
+        "target": "EnjoyStore",
+        "value": 1,
+        "lineStyle": {
+          "color": 'gradient',
+        }
+      },
+      {
+        "source": "Storage",
+        "target": "ExportStore",
+        "value": 1,
+        "lineStyle": {
+          "color": 'gradient',
+        }
+      },
     ];
 
     this.setState(() {
-      this.links = dataObj;
+      this.data = dataObj;
+      this.links = linksObj;
+    });
+  }
+
+  getData2() async {
+    await Future.delayed(Duration(seconds: 4));
+
+    const dataObj = [
+      {
+        "name": "HM1",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
+      {
+        "name": "HM2",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
+      {
+        "name": "HM3",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
+      {
+        "name": "MT",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
+    ];
+
+    const linksObj = [
+      {
+        "source": "HM1",
+        "target": "MT",
+        "value": 1,
+        "lineStyle": {
+          "color": 'gradient',
+        }
+      },
+      {
+        "source": "HM2",
+        "target": "MT",
+        "value": 1,
+        "lineStyle": {
+          "color": 'gradient',
+        }
+      },
+      {
+        "source": "HM3",
+        "target": "MT",
+        "value": 1,
+        "lineStyle": {
+          "color": 'gradient',
+        }
+      },
+    ];
+
+    this.setState(() {
+      data.addAll(dataObj);
+      links.addAll(linksObj);
     });
   }
 
   @override
   void initState() {
     super.initState();
-
-    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
   }
 
   @override
@@ -334,13 +210,23 @@ class _MyHomePageState extends State<MyHomePage> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Echart'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.access_alarm),
+            onPressed: () {
+              getData1();
+            },
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       body: Center(
-        child: SingleChildScrollView (
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
                 child: Echarts(
                   option: '''
                     {
@@ -354,21 +240,45 @@ class _MyHomePageState extends State<MyHomePage> {
                         emphasis: {
                           focus: 'adjacency'
                         },
+                      layoutIterations: 0,
+                      nodeGap:20,
+                      height: "50%",
+                      nodeWidth: 50,
+                      nodeAlign: "right",
                       data:  ${jsonEncode(data)},
                       links: ${jsonEncode(links)},
+                      draggable: false,
+                      label: {
+                        position: "insideLeft",
+                        show: true,
+                        color: "#ffffff",
+                        formatter: '{b}'
+                      },
                       }
                     }
-                      ''',
+                  ''',
+                  extraScript: '''
+                    chart.on('click', (params) => {
+                      if(params.componentType === 'series') {
+                        Messager.postMessage(JSON.stringify({
+                          type: 'select',
+                          payload: params.dataIndex,
+                        }));
+                      }
+                    });
+                  ''',
+                  onMessage: (String message) {
+                    Map<String, dynamic> messageAction = jsonDecode(message);
+                    print(messageAction);
+                    if (messageAction['type'] == 'select') {
+                      final item = data[messageAction['payload']];
+                      if ("${item['name']}" == "H") {
+                        getData2();
+                      }
+                      ;
+                    }
+                  },
                 ),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  getData1();
-                  getData2();
-                },
-                child: Text("Ganti Data"),
               ),
             ],
           ),
