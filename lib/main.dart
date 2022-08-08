@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_echarts/flutter_echarts.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +31,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Map<String, Object>> links = [];
 
-  getData1() async {
+  String arah = '';
+
+  getData1({required String arah}) async {
     const dataObj = [
       {
         "name": "H",
@@ -64,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       },
       {
-        "name": "EnjoyStore",
+        "name": "ExportEnjoy",
         "itemStyle": {
           "color": '#000000',
         }
       },
       {
-        "name": "ExportStore",
+        "name": "StoreEnjoy",
         "itemStyle": {
           "color": '#01B0F1',
         }
@@ -82,62 +84,60 @@ class _MyHomePageState extends State<MyHomePage> {
         "source": "H",
         "target": "Storage",
         "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
       },
       {
         "source": "ExportHarvest",
         "target": "Storage",
         "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
       },
       {
         "source": "StoreHarvest",
         "target": "Storage",
         "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
       },
       {
         "source": "Storage",
         "target": "Enjoy",
         "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
       },
       {
         "source": "Storage",
-        "target": "EnjoyStore",
+        "target": "ExportEnjoy",
         "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
       },
       {
         "source": "Storage",
-        "target": "ExportStore",
+        "target": "StoreEnjoy",
         "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
       },
     ];
 
-    this.setState(() {
-      this.data = dataObj;
-      this.links = linksObj;
+    setState(() {
+      data = dataObj;
+      links = linksObj;
     });
   }
 
-  getData2() async {
-    await Future.delayed(Duration(seconds: 4));
-
+  getData2({required String arah}) async {
     const dataObj = [
+      {
+        "name": "Storage",
+        "itemStyle": {
+          "color": '#3F3F3F',
+        },
+      },
+      {
+        "name": "H",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
+      {
+        "name": "MT",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
       {
         "name": "HM1",
         "itemStyle": {
@@ -157,49 +157,168 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       },
       {
-        "name": "MT",
+        "name": "Store",
         "itemStyle": {
-          "color": '#00B04F',
+          "color": '#000000',
+        }
+      },
+      {
+        "name": "Export",
+        "itemStyle": {
+          "color": '#01B0F1',
+        }
+      },
+    ];
+
+    const linksObj = [
+      {
+        "source": "H",
+        "target": "Storage",
+        "value": 3,
+      },
+      {
+        "source": "Store",
+        "target": "Storage",
+        "value": 3,
+      },
+      {
+        "source": "Export",
+        "target": "Storage",
+        "value": 3,
+      },
+      {
+        "source": "MT",
+        "target": "H",
+        "value": 3,
+      },
+      {
+        "source": "HM1",
+        "target": "MT",
+        "value": 1,
+      },
+      {
+        "source": "HM2",
+        "target": "MT",
+        "value": 1,
+      },
+      {
+        "source": "HM3",
+        "target": "MT",
+        "value": 1,
+      },
+    ];
+
+    setState(() {
+      data = dataObj;
+      links = linksObj;
+    });
+  }
+
+  getData3({required String arah}) async {
+    const dataObj = [
+      {
+        "name": "Storage",
+        "itemStyle": {
+          "color": '#3F3F3F',
+        },
+      },
+      {
+        "name": "Enjoy",
+        "itemStyle": {
+          "color": '#FE0000',
+        },
+      },
+      {
+        "name": "Store",
+        "itemStyle": {
+          "color": '#000000',
+        }
+      },
+      {
+        "name": "Export",
+        "itemStyle": {
+          "color": '#01B0F1',
+        }
+      },
+      {
+        "name": "Aircon",
+        "itemStyle": {
+          "color": '#FE0000',
+        },
+      },
+      {
+        "name": "Utility",
+        "itemStyle": {
+          "color": '#FE0000',
+        },
+      },
+      {
+        "name": "Light",
+        "itemStyle": {
+          "color": '#FE0000',
+        },
+      },
+      {
+        "name": "Other",
+        "itemStyle": {
+          "color": '#FE0000',
         },
       },
     ];
 
     const linksObj = [
       {
-        "source": "HM1",
-        "target": "MT",
-        "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
+        "source": "Storage",
+        "target": "Enjoy",
+        "value": 0,
       },
       {
-        "source": "HM2",
-        "target": "MT",
-        "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
+        "source": "Storage",
+        "target": "Store",
+        "value": 10,
       },
       {
-        "source": "HM3",
-        "target": "MT",
+        "source": "Storage",
+        "target": "Export",
+        "value": 10,
+      },
+      {
+        "source": "Storage",
+        "target": "Enjoy",
+        "value": 8,
+      },
+      {
+        "source": "Enjoy",
+        "target": "Aircon",
+        "value": 5,
+      },
+      {
+        "source": "Enjoy",
+        "target": "Utility",
         "value": 1,
-        "lineStyle": {
-          "color": 'gradient',
-        }
+      },
+      {
+        "source": "Enjoy",
+        "target": "Light",
+        "value": 1,
+      },
+      {
+        "source": "Enjoy",
+        "target": "Other",
+        "value": 1,
       },
     ];
 
-    this.setState(() {
-      data.addAll(dataObj);
-      links.addAll(linksObj);
+    setState(() {
+      data = dataObj;
+      links = linksObj;
     });
   }
 
   @override
   void initState() {
     super.initState();
+    getData1(arah: "justify");
   }
 
   @override
@@ -214,7 +333,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: const Icon(Icons.access_alarm),
             onPressed: () {
-              getData1();
+              getData1(arah: "justify");
             },
           ),
         ],
@@ -244,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       nodeGap:20,
                       height: "50%",
                       nodeWidth: 50,
-                      nodeAlign: "right",
+                      nodeAlign: "${arah}",
                       data:  ${jsonEncode(data)},
                       links: ${jsonEncode(links)},
                       draggable: false,
@@ -261,7 +380,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     chart.on('click', (params) => {
                       if(params.componentType === 'series') {
                         Messager.postMessage(JSON.stringify({
-                          type: 'select',
                           payload: params.dataIndex,
                         }));
                       }
@@ -270,12 +388,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   onMessage: (String message) {
                     Map<String, dynamic> messageAction = jsonDecode(message);
                     print(messageAction);
-                    if (messageAction['type'] == 'select') {
-                      final item = data[messageAction['payload']];
-                      if ("${item['name']}" == "H") {
-                        getData2();
-                      }
-                      ;
+                    final item = data[messageAction['payload']];
+                    if ("${item['name']}" == "H") {
+                      getData2(arah: "left");
+                    } else if ("${item['name']}" == "Storage") {
+                      getData1(arah: "justify");
+                    } else if ("${item['name']}" == "Enjoy") {
+                      getData3(arah: "right");
                     }
                   },
                 ),
