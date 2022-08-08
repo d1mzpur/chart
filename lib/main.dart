@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_echarts/flutter_echarts.dart';
 
 void main() => runApp(MyApp());
@@ -40,42 +41,49 @@ class _MyHomePageState extends State<MyHomePage> {
         "itemStyle": {
           "color": '#00B04F',
         },
+        "value": "1"
       },
       {
         "name": "Storage",
         "itemStyle": {
           "color": '#3F3F3F',
         },
+        "value": "1"
       },
       {
         "name": "ExportHarvest",
         "itemStyle": {
           "color": '#000000',
         },
+        "value": "1"
       },
       {
         "name": "StoreHarvest",
         "itemStyle": {
           "color": '#01B0F2',
         },
+        "value": "1"
       },
       {
         "name": "Enjoy",
         "itemStyle": {
           "color": '#FE0000',
         },
+        "value": "1"
       },
       {
         "name": "ExportEnjoy",
         "itemStyle": {
           "color": '#000000',
-        }
+        },
+        "value": "1"
       },
       {
         "name": "StoreEnjoy",
         "itemStyle": {
           "color": '#01B0F1',
-        }
+        },
+        "value": "1"
       },
     ];
 
@@ -115,29 +123,12 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       data = dataObj;
       links = linksObj;
+      arah = arah;
     });
   }
 
   getData2({required String arah}) async {
     const dataObj = [
-      {
-        "name": "Storage",
-        "itemStyle": {
-          "color": '#3F3F3F',
-        },
-      },
-      {
-        "name": "H",
-        "itemStyle": {
-          "color": '#00B04F',
-        },
-      },
-      {
-        "name": "MT",
-        "itemStyle": {
-          "color": '#00B04F',
-        },
-      },
       {
         "name": "HM1",
         "itemStyle": {
@@ -157,6 +148,18 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       },
       {
+        "name": "MT",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
+      {
+        "name": "H",
+        "itemStyle": {
+          "color": '#00B04F',
+        },
+      },
+      {
         "name": "Store",
         "itemStyle": {
           "color": '#000000',
@@ -168,49 +171,56 @@ class _MyHomePageState extends State<MyHomePage> {
           "color": '#01B0F1',
         }
       },
+      {
+        "name": "Storage",
+        "itemStyle": {
+          "color": '#3F3F3F',
+        },
+      },
     ];
 
     const linksObj = [
       {
-        "source": "H",
-        "target": "Storage",
+        "source": "HM1",
+        "target": "MT",
         "value": 3,
       },
       {
-        "source": "Store",
-        "target": "Storage",
+        "source": "HM2",
+        "target": "MT",
         "value": 3,
       },
       {
-        "source": "Export",
-        "target": "Storage",
+        "source": "HM3",
+        "target": "MT",
         "value": 3,
       },
       {
         "source": "MT",
         "target": "H",
-        "value": 3,
+        "value": 9,
       },
       {
-        "source": "HM1",
-        "target": "MT",
-        "value": 1,
+        "source": "H",
+        "target": "Storage",
+        "value": 9,
       },
       {
-        "source": "HM2",
-        "target": "MT",
-        "value": 1,
+        "source": "Store",
+        "target": "Storage",
+        "value": 9,
       },
       {
-        "source": "HM3",
-        "target": "MT",
-        "value": 1,
+        "source": "Export",
+        "target": "Storage",
+        "value": 9,
       },
     ];
 
     setState(() {
       data = dataObj;
       links = linksObj;
+      arah = arah;
     });
   }
 
@@ -312,6 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       data = dataObj;
       links = linksObj;
+      arah = arah;
     });
   }
 
@@ -340,66 +351,63 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Colors.white,
       body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: Echarts(
-                  option: '''
-                    {
-                      tooltip: {
-                        trigger: 'item',
-                        triggerOn: 'click'
-                      },
-                      series: {
-                        type: 'sankey',
-                        layout: 'none',
-                        emphasis: {
-                          focus: 'adjacency'
-                        },
-                      layoutIterations: 0,
-                      nodeGap:20,
-                      height: "50%",
-                      nodeWidth: 50,
-                      nodeAlign: "${arah}",
-                      data:  ${jsonEncode(data)},
-                      links: ${jsonEncode(links)},
-                      draggable: false,
-                      label: {
-                        position: "insideLeft",
-                        show: true,
-                        color: "#ffffff",
-                        formatter: '{b}'
-                      },
-                      }
-                    }
-                  ''',
-                  extraScript: '''
-                    chart.on('click', (params) => {
-                      if(params.componentType === 'series') {
-                        Messager.postMessage(JSON.stringify({
-                          payload: params.dataIndex,
-                        }));
-                      }
-                    });
-                  ''',
-                  onMessage: (String message) {
-                    Map<String, dynamic> messageAction = jsonDecode(message);
-                    print(messageAction);
-                    final item = data[messageAction['payload']];
-                    if ("${item['name']}" == "H") {
-                      getData2(arah: "left");
-                    } else if ("${item['name']}" == "Storage") {
-                      getData1(arah: "justify");
-                    } else if ("${item['name']}" == "Enjoy") {
-                      getData3(arah: "right");
-                    }
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Echarts(
+            option: '''
+              {
+                tooltip: {
+                  trigger: 'item',
+                  triggerOn: 'mousemove'
+                },
+                series: {
+                  type: 'sankey',
+                  layout: 'none',
+                  emphasis: {
+                    focus: 'adjacency'
                   },
-                ),
-              ),
-            ],
+                layoutIterations: 0,
+                nodeGap: 8,
+                height: "50%",
+                nodeWidth: 60,
+                nodeAlign: "${arah}",
+                data:  ${jsonEncode(data)},
+                links: ${jsonEncode(links)},
+                draggable: false,
+                label: {
+                  position: "inside",
+                  overflow: "break",
+                  show: true,
+                  color: "#FFFFFF",
+                  formatter: '{b}: {c}'
+                },
+                }
+              }
+            ''',
+            extraScript: '''
+              chart.on('click', (params) => {
+                if(params.componentType === 'series') {
+                  Messager.postMessage(JSON.stringify({
+                    payload: params.dataIndex,
+                  }));
+                }
+              });
+            ''',
+            onMessage: (String message) {
+              Map<String, dynamic> messageAction = jsonDecode(message);
+              print(messageAction);
+              final item = data[messageAction['payload']];
+
+              if ("${item['name']}" == "H") {
+                getData2(arah: "right");
+                print(item);
+              } else if ("${item['name']}" == "Storage") {
+                getData1(arah: "justify");
+              } else if ("${item['name']}" == "Enjoy") {
+                getData3(arah: "right");
+              }
+            },
           ),
         ),
       ),
