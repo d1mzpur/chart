@@ -32,58 +32,58 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Map<String, Object>> links = [];
 
-  String arah = '';
 
-  getData1({required String arah}) async {
+
+  getData1() async {
     const dataObj = [
       {
         "name": "H",
         "itemStyle": {
           "color": '#00B04F',
         },
-        "value": "1"
+        "value": "455"
       },
       {
         "name": "Storage",
         "itemStyle": {
           "color": '#3F3F3F',
         },
-        "value": "1"
+        "value": "758"
       },
       {
         "name": "ExportHarvest",
         "itemStyle": {
           "color": '#000000',
         },
-        "value": "1"
+        "value": "174"
       },
       {
         "name": "StoreHarvest",
         "itemStyle": {
           "color": '#01B0F2',
         },
-        "value": "1"
+        "value": "129"
       },
       {
         "name": "Enjoy",
         "itemStyle": {
           "color": '#FE0000',
         },
-        "value": "1"
+        "value": "614"
       },
       {
         "name": "ExportEnjoy",
         "itemStyle": {
           "color": '#000000',
         },
-        "value": "1"
+        "value": "15"
       },
       {
         "name": "StoreEnjoy",
         "itemStyle": {
           "color": '#01B0F1',
         },
-        "value": "1"
+        "value": "129"
       },
     ];
 
@@ -91,91 +91,98 @@ class _MyHomePageState extends State<MyHomePage> {
       {
         "source": "H",
         "target": "Storage",
-        "value": 1,
+        "value": "455",
       },
       {
         "source": "ExportHarvest",
         "target": "Storage",
-        "value": 1,
+        "value": "174",
       },
       {
         "source": "StoreHarvest",
         "target": "Storage",
-        "value": 1,
+        "value": "129",
       },
       {
         "source": "Storage",
         "target": "Enjoy",
-        "value": 1,
+        "value": "614",
       },
       {
         "source": "Storage",
         "target": "ExportEnjoy",
-        "value": 1,
+        "value": "15",
       },
       {
         "source": "Storage",
         "target": "StoreEnjoy",
-        "value": 1,
+        "value": "129",
       },
     ];
 
     setState(() {
       data = dataObj;
       links = linksObj;
-      arah = arah;
     });
   }
 
-  getData2({required String arah}) async {
+  getData2() async {
     const dataObj = [
       {
         "name": "HM1",
         "itemStyle": {
           "color": '#00B04F',
         },
+        "value": "151"
       },
       {
         "name": "HM2",
         "itemStyle": {
           "color": '#00B04F',
         },
+        "value": "151"
       },
       {
         "name": "HM3",
         "itemStyle": {
           "color": '#00B04F',
         },
+        "value": "153"
       },
       {
         "name": "MT",
         "itemStyle": {
           "color": '#00B04F',
         },
+        "value": "455"
       },
       {
         "name": "H",
         "itemStyle": {
           "color": '#00B04F',
         },
+        "value": "455"
       },
       {
         "name": "Store",
         "itemStyle": {
           "color": '#000000',
-        }
+        },
+        "value": "174"
       },
       {
         "name": "Export",
         "itemStyle": {
           "color": '#01B0F1',
-        }
+        },
+        "value": "129"
       },
       {
         "name": "Storage",
         "itemStyle": {
           "color": '#3F3F3F',
         },
+        "value": "758"
       },
     ];
 
@@ -183,96 +190,103 @@ class _MyHomePageState extends State<MyHomePage> {
       {
         "source": "HM1",
         "target": "MT",
-        "value": 3,
+        "value": "151",
       },
       {
         "source": "HM2",
         "target": "MT",
-        "value": 3,
+        "value": "151",
       },
       {
         "source": "HM3",
         "target": "MT",
-        "value": 3,
+        "value": "153",
       },
       {
         "source": "MT",
         "target": "H",
-        "value": 9,
+        "value": "455",
       },
       {
         "source": "H",
         "target": "Storage",
-        "value": 9,
+        "value": "455",
       },
       {
         "source": "Store",
         "target": "Storage",
-        "value": 9,
+        "value": "174",
       },
       {
         "source": "Export",
         "target": "Storage",
-        "value": 9,
+        "value": "129",
       },
     ];
 
     setState(() {
       data = dataObj;
       links = linksObj;
-      arah = arah;
     });
   }
 
-  getData3({required String arah}) async {
+  getData3() async {
     const dataObj = [
       {
         "name": "Storage",
         "itemStyle": {
           "color": '#3F3F3F',
         },
+        "value": "758",
       },
       {
         "name": "Enjoy",
         "itemStyle": {
           "color": '#FE0000',
         },
-      },
-      {
-        "name": "Store",
-        "itemStyle": {
-          "color": '#000000',
-        }
-      },
-      {
-        "name": "Export",
-        "itemStyle": {
-          "color": '#01B0F1',
-        }
+        "value": "614"
       },
       {
         "name": "Aircon",
         "itemStyle": {
           "color": '#FE0000',
         },
+        "value": "325"
       },
       {
         "name": "Utility",
         "itemStyle": {
           "color": '#FE0000',
         },
+        "value": "166"
       },
       {
         "name": "Light",
         "itemStyle": {
           "color": '#FE0000',
         },
+        "value": "55.3"
       },
       {
         "name": "Other",
         "itemStyle": {
           "color": '#FE0000',
         },
+        "value": "67.5"
+      },
+      {
+        "name": "Store",
+        "itemStyle": {
+          "color": '#000000',
+        },
+        "value": "15"
+      },
+      {
+        "name": "Export",
+        "itemStyle": {
+          "color": '#01B0F1',
+        },
+        "value": "129"
       },
     ];
 
@@ -280,56 +294,50 @@ class _MyHomePageState extends State<MyHomePage> {
       {
         "source": "Storage",
         "target": "Enjoy",
-        "value": 0,
+        "value": "614",
       },
       {
         "source": "Storage",
         "target": "Store",
-        "value": 10,
+        "value": "15",
       },
       {
         "source": "Storage",
         "target": "Export",
-        "value": 10,
-      },
-      {
-        "source": "Storage",
-        "target": "Enjoy",
-        "value": 8,
+        "value": "129",
       },
       {
         "source": "Enjoy",
         "target": "Aircon",
-        "value": 5,
+        "value": "325",
       },
       {
         "source": "Enjoy",
         "target": "Utility",
-        "value": 1,
+        "value": "166",
       },
       {
         "source": "Enjoy",
         "target": "Light",
-        "value": 1,
+        "value": "55.3",
       },
       {
         "source": "Enjoy",
         "target": "Other",
-        "value": 1,
+        "value": "67.5",
       },
     ];
 
     setState(() {
       data = dataObj;
       links = linksObj;
-      arah = arah;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    getData1(arah: "justify");
+    getData1();
   }
 
   @override
@@ -344,7 +352,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: const Icon(Icons.access_alarm),
             onPressed: () {
-              getData1(arah: "justify");
+              getData1();
             },
           ),
         ],
@@ -355,6 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Echarts(
+            reloadAfterInit: true,
             option: '''
               {
                 tooltip: {
@@ -366,12 +375,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   layout: 'none',
                   emphasis: {
                     focus: 'adjacency'
-                  },
+                },
                 layoutIterations: 0,
                 nodeGap: 8,
                 height: "50%",
                 nodeWidth: 60,
-                nodeAlign: "${arah}",
+                nodeAlign: 'justify',
                 data:  ${jsonEncode(data)},
                 links: ${jsonEncode(links)},
                 draggable: false,
@@ -400,12 +409,11 @@ class _MyHomePageState extends State<MyHomePage> {
               final item = data[messageAction['payload']];
 
               if ("${item['name']}" == "H") {
-                getData2(arah: "right");
-                print(item);
+                getData2();
               } else if ("${item['name']}" == "Storage") {
-                getData1(arah: "justify");
+                getData1();
               } else if ("${item['name']}" == "Enjoy") {
-                getData3(arah: "right");
+                getData3();
               }
             },
           ),
