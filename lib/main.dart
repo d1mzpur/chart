@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
+import 'package:chart/utility/ex_echart.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,8 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Map<String, Object>> data = [];
 
   List<Map<String, Object>> links = [];
-
-
 
   getData1() async {
     const dataObj = [
@@ -362,60 +360,64 @@ class _MyHomePageState extends State<MyHomePage> {
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Echarts(
-            reloadAfterInit: true,
-            option: '''
-              {
-                tooltip: {
-                  trigger: 'item',
-                  triggerOn: 'mousemove'
-                },
-                series: {
-                  type: 'sankey',
-                  layout: 'none',
-                  emphasis: {
-                    focus: 'adjacency'
-                },
-                layoutIterations: 0,
-                nodeGap: 8,
-                height: "50%",
-                nodeWidth: 60,
-                nodeAlign: 'justify',
-                data:  ${jsonEncode(data)},
-                links: ${jsonEncode(links)},
-                draggable: false,
-                label: {
-                  position: "inside",
-                  overflow: "break",
-                  show: true,
-                  color: "#FFFFFF",
-                  formatter: '{b}: {c}'
-                },
-                }
-              }
-            ''',
-            extraScript: '''
-              chart.on('click', (params) => {
-                if(params.componentType === 'series') {
-                  Messager.postMessage(JSON.stringify({
-                    payload: params.dataIndex,
-                  }));
-                }
-              });
-            ''',
-            onMessage: (String message) {
-              Map<String, dynamic> messageAction = jsonDecode(message);
-              print(messageAction);
-              final item = data[messageAction['payload']];
+          child: Column(
+            children: [
+              Echarts(
+                reloadAfterInit: false,
+                option: '''
+                  {
+                    tooltip: {
+                      trigger: 'item',
+                      triggerOn: 'mousemove'
+                    },
+                    series: {
+                      type: 'sankey',
+                      layout: 'none',
+                      emphasis: {
+                        focus: 'adjacency'
+                    },
+                    layoutIterations: 0,
+                    nodeGap: 8,
+                    height: "50%",
+                    nodeWidth: 60,
+                    nodeAlign: 'justify',
+                    data:  ${jsonEncode(data)},
+                    links: ${jsonEncode(links)},
+                    draggable: false,
+                    label: {
+                      position: "inside",
+                      overflow: "break",
+                      show: true,
+                      color: "#FFFFFF",
+                      formatter: '{b}: {c}'
+                    },
+                    }
+                  }
+                ''',
+                extraScript: '''
+                  chart.on('click', (params) => {
+                    if(params.componentType === 'series') {
+                      Messager.postMessage(JSON.stringify({
+                        payload: params.dataIndex,
+                      }));
+                    }
+                  });
+                ''',
+                onMessage: (String message) {
+                  Map<String, dynamic> messageAction = jsonDecode(message);
+                  print(messageAction);
+                  final item = data[messageAction['payload']];
 
-              if ("${item['name']}" == "H") {
-                getData2();
-              } else if ("${item['name']}" == "Storage") {
-                getData1();
-              } else if ("${item['name']}" == "Enjoy") {
-                getData3();
-              }
-            },
+                  if ("${item['name']}" == "H") {
+                    getData2();
+                  } else if ("${item['name']}" == "Storage") {
+                    getData1();
+                  } else if ("${item['name']}" == "Enjoy") {
+                    getData3();
+                  }
+                },
+              ),
+            ],
           ),
         ),
       ),
