@@ -1,15 +1,15 @@
 library flutter_echarts;
 
 import 'package:chart/extentions/target.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_macos_webview/flutter_macos_webview.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 import 'register_web_webview_stub.dart'
     if (dart.library.html) 'register_web_webview.dart';
-
-import 'flutter_macos_webview.dart';
 
 import 'echarts_script.dart' show echartsScript;
 
@@ -62,6 +62,31 @@ class Echarts extends StatefulWidget {
 
 class _EchartsState extends State<Echarts> {
   WebViewController? _controller;
+
+  Future<void> _onOpenPressed(PresentationStyle presentationStyle) async {
+    final webview = FlutterMacOSWebView(
+      onOpen: () => print('Opened'),
+      onClose: () => print('Closed'),
+      onPageStarted: (url) => print('Page started: $url'),
+      onPageFinished: (url) => print('Page finished: $url'),
+      onWebResourceError: (err) {
+        print(
+          'Error: ${err.errorCode}, ${err.errorType}, ${err.domain}, ${err.description}',
+        );
+      },
+    );
+
+    await webview.open(
+      url: htmlBase64,
+      presentationStyle: presentationStyle,
+      size: Size(400.0, 400.0),
+      userAgent:
+          'Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Mobile/15E148 Safari/604.1',
+    );
+
+    // await Future.delayed(Duration(seconds: 5));
+    // await webview.close();
+  }
 
   String? _currentOption;
 
@@ -179,7 +204,12 @@ class _EchartsState extends State<Echarts> {
           ].toSet(),
           gestureRecognizers: getGestureRecognizers());
     } else if (isMacOS()) {
-      return Container();
+      return ElevatedButton(
+        child: Text("Google"),
+        onPressed: () {
+          _onOpenPressed(PresentationStyle.modal);
+        },
+      );
     } else {
       return Container();
     }
