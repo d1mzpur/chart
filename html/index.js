@@ -7,34 +7,38 @@ var app = {};
 
 var option;
 myChart.showLoading();
-$.get('sundaya.json', function (data){
+const root = 'https://echarts.apache.org/examples';
+const params = new URLSearchParams(window.location.search);
+const path =  params.get("id");
+console.log("id:", path);
+
+$.get(path, function (data){
       myChart.hideLoading();
-    option = {
+        option = {
         series: [{
             type: 'sankey',
-            left: 50.0,
+            left: -180.0,
             top: 50.0,
             right: 50.0,
             bottom: 50.0,
             draggable: false,
             nodeGap: 30,
+            emphasis: {
+                focus: 'adjacency'
+            },
             data: data.nodes,
             links: data.links,
-            lineStyle: {
-                color: 'source',
-                curveness: 0.5
-            },
-            itemStyle: {
-                color: '#1f77b4',
-                borderColor: '#1f77b4'
-            },
             label: {
                 position: "top",
                 overflow: "break",
                 show: true,
                 color: "#000000",
                 formatter: '{b}: {c}'
-            }
+            },
+            lineStyle: {
+            color: 'source',
+            curveness: 0.2
+          }
         }],
         tooltip: {
             trigger: 'item'
