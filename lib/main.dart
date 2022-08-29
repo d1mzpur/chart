@@ -1,14 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:chart/utility/ex_echart.dart';
+
+import 'package:flutter_echarts/flutter_echarts.dart';
+// import 'package:number_display/number_display.dart';
+
+// final display = createDisplay(decimal: 2);
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,6 +31,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   List<Map<String, Object>> data = [];
 
   List<Map<String, Object>> links = [];
@@ -131,56 +136,64 @@ class _MyHomePageState extends State<MyHomePage> {
         "itemStyle": {
           "color": '#00B04F',
         },
-        "value": "151"
+        "value": "151",
+        "depth": "1"
       },
       {
         "name": "HM2",
         "itemStyle": {
           "color": '#00B04F',
         },
-        "value": "151"
+        "value": "151",
+        "depth": "1"
       },
       {
         "name": "HM3",
         "itemStyle": {
           "color": '#00B04F',
         },
-        "value": "153"
+        "value": "153",
+        "depth": "1"
       },
       {
         "name": "MT",
         "itemStyle": {
           "color": '#00B04F',
         },
-        "value": "455"
+        "value": "455",
+        "depth": "2"
       },
       {
         "name": "H",
         "itemStyle": {
           "color": '#00B04F',
         },
-        "value": "455"
+        "value": "455",
+        "depth": "3"
       },
       {
         "name": "Store",
         "itemStyle": {
           "color": '#000000',
         },
-        "value": "174"
+        "value": "174",
+        "depth": "3"
       },
       {
         "name": "Export",
         "itemStyle": {
           "color": '#01B0F1',
         },
-        "value": "129"
+        "value": "129",
+        "depth": "3"
       },
       {
         "name": "Storage",
         "itemStyle": {
           "color": '#3F3F3F',
         },
-        "value": "758"
+        "value": "758",
+        "depth": "4"
       },
     ];
 
@@ -236,55 +249,63 @@ class _MyHomePageState extends State<MyHomePage> {
           "color": '#3F3F3F',
         },
         "value": "758",
+        "depth": "1"
       },
       {
         "name": "Enjoy",
         "itemStyle": {
           "color": '#FE0000',
         },
-        "value": "614"
+        "value": "614",
+        "depth": "2"
       },
       {
         "name": "Aircon",
         "itemStyle": {
           "color": '#FE0000',
         },
-        "value": "325"
+        "value": "325",
+        "depth": "3"
       },
       {
         "name": "Utility",
         "itemStyle": {
           "color": '#FE0000',
         },
-        "value": "166"
+        "value": "166",
+        "depth": "3"
       },
       {
         "name": "Light",
         "itemStyle": {
           "color": '#FE0000',
         },
-        "value": "55.3"
+        "value": "55.3",
+        "depth": "3"
       },
       {
         "name": "Other",
         "itemStyle": {
           "color": '#FE0000',
         },
-        "value": "67.5"
+        "value": "67.5",
+        "depth": "3"
       },
       {
         "name": "Store",
         "itemStyle": {
           "color": '#000000',
         },
-        "value": "15"
+        "value": "15",
+        "depth": "2"
       },
       {
         "name": "Export",
         "itemStyle": {
           "color": '#01B0F1',
         },
-        "value": "129"
+        "value": "129",
+        "depth": "2"
       },
     ];
 
@@ -332,90 +353,105 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _landscapeModeOnly() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+
+  void _enableRotation() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+  }
+
   @override
   void initState() {
     super.initState();
+    _landscapeModeOnly();
     getData1();
+  }
+
+  void dispose() {
+    _enableRotation();
   }
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Echart'),
+        title: Text('Sankey Diagram'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.access_alarm),
-            onPressed: () {
-              getData1();
-            },
-          ),
+              onPressed: () {
+                getData1();
+              },
+              icon: Icon(Icons.dangerous)),
         ],
       ),
-      backgroundColor: Colors.white,
-      body: Center(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
-            children: [
-              Echarts(
-                reloadAfterInit: false,
-                option: '''
-                  {
-                    tooltip: {
-                      trigger: 'item',
-                      triggerOn: 'mousemove'
-                    },
-                    series: {
-                      type: 'sankey',
-                      layout: 'none',
-                      emphasis: {
-                        focus: 'adjacency'
-                    },
-                    layoutIterations: 0,
-                    nodeGap: 8,
-                    height: "50%",
-                    nodeWidth: 60,
-                    nodeAlign: 'justify',
-                    data:  ${jsonEncode(data)},
-                    links: ${jsonEncode(links)},
-                    draggable: false,
-                    label: {
-                      position: "inside",
-                      overflow: "break",
-                      show: true,
-                      color: "#FFFFFF",
-                      formatter: '{b}: {c}'
-                    },
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: Echarts(
+                  option: '''
+                     {
+                      series: {
+                          type: 'sankey',
+                          left: 50.0,
+                          top: 50.0,
+                          right: 50.0,
+                          bottom: 50.0,
+                          draggable: false,
+                          nodeGap: 30,
+                          emphasis: {
+                            focus: 'adjacency'
+                          },
+                        data:  ${jsonEncode(data)},
+                        links: ${jsonEncode(links)},
+                        label: {
+                          position: "top",
+                          overflow: "break",
+                          show: true,
+                          color: "#000000",
+                          formatter: '{b}: {c}'
+                        },
+                        tooltip: {
+                          trigger: 'item',
+                        },
+                      }
                     }
-                  }
-                ''',
-                extraScript: '''
-                  chart.on('click', (params) => {
-                    if(params.componentType === 'series') {
-                      Messager.postMessage(JSON.stringify({
-                        payload: params.dataIndex,
-                      }));
-                    }
-                  });
-                ''',
-                onMessage: (String message) {
-                  Map<String, dynamic> messageAction = jsonDecode(message);
-                  print(messageAction);
-                  final item = data[messageAction['payload']];
+                    ''',
+                  extraScript: '''
+                      chart.on('click', (params) => {
+                        if(params.componentType === 'series') {
+                          Messager.postMessage(JSON.stringify({
+                            payload: params.dataIndex,
+                          }));
+                        }
+                      });
+                    ''',
+                  onMessage: (String message) {
+                    Map<String, dynamic> messageAction = jsonDecode(message);
+                    print(messageAction);
+                    final item = data[messageAction['payload']];
 
-                  if ("${item['name']}" == "H") {
-                    getData2();
-                  } else if ("${item['name']}" == "Storage") {
-                    getData1();
-                  } else if ("${item['name']}" == "Enjoy") {
-                    getData3();
-                  }
-                },
+                    if ("${item['name']}" == "H") {
+                      getData2();
+                    } else if ("${item['name']}" == "Storage") {
+                      getData1();
+                    } else if ("${item['name']}" == "Enjoy") {
+                      getData3();
+                    }
+                  },
+                ),
               ),
             ],
           ),
