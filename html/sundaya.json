@@ -5,105 +5,120 @@
       "itemStyle": {
         "color": "#00B04F"
       },
-      "value": "151"
+      "value": "151",
+      "depth": "1"
     },
     {
       "name": "HM2",
       "itemStyle": {
         "color": "#00B04F"
       },
-      "value": "151"
+      "value": "151",
+      "depth": "1"
     },
     {
       "name": "HM3",
       "itemStyle": {
         "color": "#00B04F"
       },
-      "value": "153"
+      "value": "153",
+      "depth": "1"
     },
     {
       "name": "MT",
       "itemStyle": {
         "color": "#00B04F"
       },
-      "value": "455"
+      "value": "455",
+      "depth": "2"
     },
     {
       "name": "H",
       "itemStyle": {
         "color": "#00B04F"
       },
-      "value": "455"
+      "value": "455",
+      "depth": "3"
     },
     {
       "name": "ExportHarvest",
       "itemStyle": {
         "color": "#000000"
       },
-      "value": "174"
+      "value": "174",
+      "depth": "3"
     },
     {
       "name": "StoreHarvest",
       "itemStyle": {
         "color": "#01B0F2"
       },
-      "value": "129"
+      "value": "129",
+      "depth": "3"
     },
     {
       "name": "Storage",
       "itemStyle": {
         "color": "#3F3F3F"
       },
-      "value": "758"
+      "value": "758",
+      "depth": "4"
     },
     {
       "name": "Enjoy",
       "itemStyle": {
         "color": "#FE0000"
       },
-      "value": "614"
+      "value": "614",
+      "depth": "5"
     },
     {
       "name": "StoreEnjoy",
       "itemStyle": {
         "color": "#01B0F1"
       },
-      "value": "129"
+      "value": "129",
+      "depth": "5"
     },
     {
       "name": "ExportEnjoy",
       "itemStyle": {
         "color": "#000000"
       },
-      "value": "15"
+      "value": "15",
+      "depth": "5"
     },
     {
       "name": "Aircon",
       "itemStyle": {
         "color": "#FE0000"
       },
-      "value": "325"
+      "value": "325",
+      "depth": "6"
     },
     {
       "name": "Utility",
       "itemStyle": {
         "color": "#FE0000"
       },
-      "value": "166"
+      "value": "166",
+      "depth": "6"
     },
     {
       "name": "Light",
       "itemStyle": {
         "color": "#FE0000"
       },
-      "value": "55.3"
+      "value": "55.3",
+      "depth": "6"
     },
     {
       "name": "Other",
       "itemStyle": {
         "color": "#FE0000"
       },
-      "value": "67.5"
+      "value": "67.5",
+      "depth": "6"
     }
   ],
   "links": [
