@@ -44,49 +44,56 @@ class _MyHomePageState extends State<MyHomePage> {
         "itemStyle": {
           "color": '#00B04F',
         },
-        "value": "455"
+        "value": "455",
+        "depth": "1"
       },
       {
         "name": "Storage",
         "itemStyle": {
           "color": '#3F3F3F',
         },
-        "value": "758"
+        "value": "758",
+        "depth": "2"
       },
       {
         "name": "ExportHarvest",
         "itemStyle": {
           "color": '#000000',
         },
-        "value": "174"
+        "value": "174",
+        "depth": "1"
       },
       {
         "name": "StoreHarvest",
         "itemStyle": {
           "color": '#01B0F2',
         },
-        "value": "129"
+        "value": "129",
+        "depth": "1"
       },
       {
         "name": "Enjoy",
         "itemStyle": {
           "color": '#FE0000',
         },
-        "value": "614"
+        "value": "614",
+        "depth": "3"
       },
       {
         "name": "ExportEnjoy",
         "itemStyle": {
           "color": '#000000',
         },
-        "value": "15"
+        "value": "15",
+        "depth": "3"
       },
       {
         "name": "StoreEnjoy",
         "itemStyle": {
           "color": '#01B0F1',
         },
-        "value": "129"
+        "value": "129",
+        "depth": "3"
       },
     ];
 
@@ -236,8 +243,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     setState(() {
-      data = dataObj;
-      links = linksObj;
+      data.addAll(dataObj);
+      links.addAll(linksObj);
     });
   }
 
@@ -405,9 +412,9 @@ class _MyHomePageState extends State<MyHomePage> {
                      {
                       series: {
                           type: 'sankey',
-                          left: 50.0,
+                          left: -180.0,
                           top: 50.0,
-                          right: 50.0,
+                          right: 130.0,
                           bottom: 50.0,
                           draggable: false,
                           nodeGap: 30,
