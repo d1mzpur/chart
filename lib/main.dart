@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_echarts/flutter_echarts.dart';
+import 'package:http/http.dart' as http;
 // import 'package:number_display/number_display.dart';
 
 // final display = createDisplay(decimal: 2);
@@ -33,9 +34,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  List<Map<String, Object>> data = [];
+  List<Map<String, dynamic>> data = [];
 
-  List<Map<String, Object>> links = [];
+  List<Map<String, dynamic>> links = [];
+
+  Future<void> getDataAPI() async {
+    final response =
+        await http.post(Uri.parse('https://testing.d1mzpur.xyz/sundaya.json'));
+    var dataAPI = json.decode(response.body);
+
+    print(dataAPI["nodes"]);
+    print(dataAPI["links"]);
+
+    setState(() {
+      data = List<Map<String, dynamic>>.from(dataAPI["nodes"]);
+      links = List<Map<String, dynamic>>.from(dataAPI["links"]);
+    });
+  }
 
   getData1() async {
     const dataObj = [
@@ -396,7 +411,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
               onPressed: () {
-                getData1();
+                getDataAPI();
               },
               icon: Icon(Icons.dangerous)),
         ],
