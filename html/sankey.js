@@ -7,20 +7,20 @@ var app = {};
 
 var option;
 myChart.showLoading();
-const root = 'https://echarts.apache.org/examples';
+const ROOT_PATH = 'https://testing.d1mzpur.xyz/sankey/api-view.php?projectName=';
 const params = new URLSearchParams(window.location.search);
-const path =  params.get("id");
-console.log("id:", path);
+const path =  params.get("projectName");
+const test = 'https://testing.d1mzpur.xyz/sankey/aku.json';
 
-$.get(path, function (data){
+$.getJSON(ROOT_PATH + path,  function (data)  {
       myChart.hideLoading();
         option = {
         series: [{
             type: 'sankey',
-            left: -180.0,
+            left: -100,
             top: 50.0,
-            right: 50.0,
-            bottom: 50.0,
+            right: 100,
+            bottom: 50,
             draggable: false,
             nodeGap: 30,
             emphasis: {
@@ -41,7 +41,8 @@ $.get(path, function (data){
           }
         }],
         tooltip: {
-            trigger: 'item'
+            trigger: 'item',
+            formatter: function(params) { return params.value},
         }
     };
 
@@ -49,6 +50,11 @@ $.get(path, function (data){
 if (option && typeof option === 'object') {
     myChart.setOption(option);
 }
+
+myChart.on('click', function(params) {
+  // Print name in console
+  console.log(params.name);
+});
 
 window.addEventListener('resize', myChart.resize);
 
